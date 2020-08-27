@@ -1,14 +1,38 @@
 /* jshint esversion: 6 */
-document.addEventListener('DOMContentLoaded', () => {
-    const squares = document.querySelectorAll(".grid div");
-    const resultDisplay = document.querySelector("#result");
-    let width = 15;
-    let currentShooterIndex = 202;
-    let currentInvaderIndex = 0;
-    let alienInvadersTakenDown = [];
-    let result = 0;
-    let direction = 1;
-    let invaderId;
+
+const start = document.querySelector('#start');
+const squares = document.querySelectorAll(".grid div");
+const resultDisplay = document.querySelector("#result");
+let width = 15;
+let currentShooterIndex = 202;
+let currentInvaderIndex = 0;
+let alienInvadersTakenDown = [];
+let result = 0;
+let direction = 1;
+let invaderId;
+
+function reset() {
+    currentShooterIndex = 202;
+    currentInvaderIndex = 0;
+    alienInvadersTakenDown = [];
+    result = 0;
+    direction = 1;
+    clearInterval(invaderId);
+
+    //clear the invaders for restart condition
+
+    squares.forEach(invader => {
+        invader.classList.remove('invader');
+    //     alienInvaders.forEach(invader => squares[currentInvaderIndex + invader].classList.remove('invader'));
+    });
+}
+
+start.addEventListener('click', () => {
+    // const squares = document.querySelectorAll(".grid div");
+    // const resultDisplay = document.querySelector("#result");
+    // let width = 15;
+    reset();
+
 
     //define the alien invaders
     const alienInvaders = [
@@ -16,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
         15,16,17,18,19,20,21,22,23,24,
         30,31,32,33,34,35,36,37,38,39
     ];
+
+    
 
     //draw the alien invaders
     alienInvaders.forEach(invader => squares[currentInvaderIndex + invader].classList.add('invader'));
